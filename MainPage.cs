@@ -19,7 +19,7 @@ namespace PickingTheStones
             InitializeComponent();
             this.dama = 10;
         }
-        private PictureBoxes pbxs;
+        private CreateGame pbxs;
         private void MainPage_Load(object sender, EventArgs e)
         {
             this.BackColor = Color.SkyBlue;
@@ -27,22 +27,9 @@ namespace PickingTheStones
             this.Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
                 (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2);
             
-            pbxs = new PictureBoxes(dama);
-            pbxs.insertPB(this);
-            
-            //for(int x =0; x < dama; x++)
-            //{
-            //    for (int y = 0; y < dama; y++)
-            //    {
-            //        pbxs.SetColor_pb(0, x, y);
-
-            //    }
-            //}
-
-            
-
-            
-
+            pbxs = new CreateGame(dama);
+            StartGame start = new StartGame();
+            pbxs.insertCompanents(this);
         }
     }
 }

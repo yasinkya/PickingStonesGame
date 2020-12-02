@@ -13,7 +13,7 @@ namespace PickingTheStones
     class StartGame
     {
 
-        public StartGame(PictureBox[] pb)
+        public StartGame()
         {
             
         }
