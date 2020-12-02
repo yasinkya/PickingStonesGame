@@ -1,0 +1,11 @@
+C:\Users\Kaya\Desktop\projects\cs_p\PickingTheStones\PickingTheStones\bin\Debug\PickingTheStones.exe.config
+C:\Users\Kaya\Desktop\projects\cs_p\PickingTheStones\PickingTheStones\bin\Debug\PickingTheStones.exe
+C:\Users\Kaya\Desktop\projects\cs_p\PickingTheStones\PickingTheStones\bin\Debug\PickingTheStones.pdb
+C:\Users\Kaya\Desktop\projects\cs_p\PickingTheStones\PickingTheStones\obj\Debug\PickingTheStones.csprojAssemblyReference.cache
+C:\Users\Kaya\Desktop\projects\cs_p\PickingTheStones\PickingTheStones\obj\Debug\PickingTheStones.Properties.Resources.resources
+C:\Users\Kaya\Desktop\projects\cs_p\PickingTheStones\PickingTheStones\obj\Debug\PickingTheStones.csproj.GenerateResource.cache
+C:\Users\Kaya\Desktop\projects\cs_p\PickingTheStones\PickingTheStones\obj\Debug\PickingTheStones.csproj.CoreCompileInputs.cache
+C:\Users\Kaya\Desktop\projects\cs_p\PickingTheStones\PickingTheStones\obj\Debug\PickingTheStones.exe
+C:\Users\Kaya\Desktop\projects\cs_p\PickingTheStones\PickingTheStones\obj\Debug\PickingTheStones.pdb
+C:\Users\Kaya\Desktop\projects\cs_p\PickingTheStones\PickingTheStones\obj\Debug\PickingTheStones.log.resources
+C:\Users\Kaya\Desktop\projects\cs_p\PickingTheStones\PickingTheStones\obj\Debug\PickingTheStones.MainPage.resources
