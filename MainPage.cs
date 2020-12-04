@@ -28,7 +28,7 @@ namespace PickingTheStones
                 (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2);
             
             pbxs = new CreateGame(dama);
-            StartGame start = new StartGame();
+            //StartGame start = new StartGame();
             pbxs.insertCompanents(this);
         }
     }
