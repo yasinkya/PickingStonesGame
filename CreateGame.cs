@@ -13,26 +13,59 @@ namespace PickingTheStones
 
     public class CreateGame
     {
-        private static MainPage main_Page = new MainPage();
+        private MainPage main_Page;
         private StartGame start;
 
-        private Image image_RedStn = main_Page.pbstn.BackgroundImage;
-        private Image image_GreenStn = main_Page.pbgstn.BackgroundImage;
-        private Image image_wall = main_Page.pbwall.BackgroundImage;
+        private Image image_RedStn;
+        private Image image_GreenStn;
+        private Image image_wall;
 
         const int startPoint = 5;
         const int pbSize = 75;
         private int dama;
-
+        private int diff;
+        int maxPickingStone;
+        int maxWall;
         PictureBox[] stones = new PictureBox[3];
         public PictureBox[,] pbx;   //pbx[y,x]
         Button btnStart = new Button();
         Label lbl;
 
-        public CreateGame(int dama)
+        LinkedList<string> pickStoneList = new LinkedList<string>();
+        LinkedList<string> wallsIn = new LinkedList<string>();
+        int toplanacakTasSayısı = 0, duvarSayısı = 0;
+        private PictureBox clickedPb;
+        bool ismainstone;
+        bool ispickStone;
+        bool iswall;
+        string mainIn;
+
+        public CreateGame(int dama, int diff, MainPage mainPage)
         {
             this.dama = dama;
+            this.diff = diff;
+            this.main_Page = mainPage;
             this.pbx = new PictureBox[dama, dama];
+            image_RedStn = main_Page.pbstn.BackgroundImage;
+            image_GreenStn = main_Page.pbgstn.BackgroundImage;
+            image_wall = main_Page.pbwall.BackgroundImage;
+
+            switch (diff)
+            {
+                case 1:
+                    maxPickingStone = 1;
+                    maxWall = 0;
+                    break;
+                case 2:
+                    maxPickingStone = 8;
+                    maxWall = 4;
+                    break;
+                case 3:
+                    maxPickingStone = 9;
+                    maxWall = 5;
+                    break;
+            }
+
             //MessageBox.Show("Welcome, For play game; \n\n1- Click to Main Stone and chose anywhere, Where will be the main stone. " +
             //    "\n2. Than insert green stones"+
             //    "\n3. If you want insert the wall block"+
@@ -48,7 +81,7 @@ namespace PickingTheStones
                 {
                     pbx[y, x] = new PictureBox();
                     SetColor_pb(0, y, x);
-                    MakeAccessible_pbx(false, y, x  );
+                    MakeAccessible_pbx(false, y, x);
                     pbx[y, x].Size = new Size(pbSize, pbSize);
                     pbx[y, x].Location = new Point(startPoint + pbSize * x, startPoint + pbSize * y);
                     pbx[y, x].Click += new EventHandler(this.Click_pb);
@@ -127,7 +160,6 @@ namespace PickingTheStones
                             this.pbx[y, x].BackColor = Color.Black;
                         else
                             this.pbx[y, x].BackColor = Color.DarkGreen;
-
                     }
                     else if ((x % 2 == 1 && y % 2 == 0) || (x % 2 == 0 && y % 2 == 1))
                     {
@@ -137,14 +169,12 @@ namespace PickingTheStones
                         else
                             this.pbx[y, x].BackColor = Color.Green;
                     }
-
                 }
             }
         }
-       
+
         internal void SetColor_pb(int clr, int y, int x)  //for selected picturebox :  clr= 0 -> set color black-white clr!=0 -> set color green-darkgreen
         {
-
             if ((y % 2 == 0 && x % 2 == 0) || (y % 2 == 1 && x % 2 == 1))
             {
                 //black     //darkgreen
@@ -152,7 +182,6 @@ namespace PickingTheStones
                     this.pbx[y, x].BackColor = Color.Black;
                 else
                     this.pbx[y, x].BackColor = Color.DarkGreen;
-
             }
             else if ((x % 2 == 1 && y % 2 == 0) || (x % 2 == 0 && y % 2 == 1))
             {
@@ -162,10 +191,8 @@ namespace PickingTheStones
                 else
                     this.pbx[y, x].BackColor = Color.Green;
             }
-
-
         }
-        
+
         internal void MakeAccessible_pbx(bool make) //  for all make true or false 
         {
             for (int y = 0; y < dama; y++)
@@ -177,20 +204,11 @@ namespace PickingTheStones
             }
         }
 
-        public void MakeAccessible_pbx(bool make, int y,int x)  //  for selected pbx make true or false
+        public void MakeAccessible_pbx(bool make, int y, int x)  //  for selected pbx make true or false
         {
             this.pbx[y, x].Enabled = make;
         }
 
-        LinkedList<string> pickStoneList = new LinkedList<string>();
-        LinkedList<string> wallsIn = new LinkedList<string>();
-        int toplanacakTasSayısı = 0, duvarSayısı = 0;
-        private PictureBox clickedPb;
-        bool ismainstone;
-        bool ispickStone;
-        bool iswall;
-        string mainIn;
-        
         private void Click_pb(Object sender, EventArgs e)
         {
             clickedPb = sender as PictureBox;
@@ -203,7 +221,7 @@ namespace PickingTheStones
                 mainIn = clickedPb.Name;
                 ismainstone = true;
             }
-            if (toplanacakTasSayısı != 3 && ispickStone)
+            if (toplanacakTasSayısı < maxPickingStone && ispickStone)
             {
                 toplanacakTasSayısı++;
                 ispickStone = false;
@@ -213,8 +231,8 @@ namespace PickingTheStones
                 pickStoneList.AddLast(clickedPb.Name);
 
             }
-            
-            if (iswall && duvarSayısı!=3)
+
+            if (iswall && duvarSayısı < maxWall)
             {
                 duvarSayısı++;
                 iswall = false;
@@ -224,7 +242,7 @@ namespace PickingTheStones
                 wallsIn.AddLast(clickedPb.Name);
             }
         }
-        
+
         private void Click_MainStone(object sender, EventArgs e)    // Main Stone click 
         {
             clickedPb = sender as PictureBox;
@@ -236,7 +254,7 @@ namespace PickingTheStones
         private void Click_PickStone(object sender, EventArgs e)    //picking stone click
         {
 
-            if (toplanacakTasSayısı != 3&&ismainstone) //is nain stone inserted
+            if (toplanacakTasSayısı < maxPickingStone  && ismainstone) //is nain stone inserted
             {
                 SetColor_pb(1);
                 MakeAccessible_pbx(true);
@@ -244,14 +262,14 @@ namespace PickingTheStones
             }
             else
             {
-                MessageBox.Show("Max Stone 3 or Firstly add Main Stone");
+                MessageBox.Show("Error : All picking Stones already inserted or Firstly add Main Stone");
             }
-            
+
         }
 
-        private void Click_Wall(object sender, EventArgs e)
+        private void Click_Wall(object sender, EventArgs e) // wall click
         {
-            if(duvarSayısı != 3 && ismainstone)
+            if (duvarSayısı < maxWall && ismainstone)
             {
                 SetColor_pb(1);
                 MakeAccessible_pbx(true);
@@ -259,19 +277,27 @@ namespace PickingTheStones
             }
             else
             {
-                MessageBox.Show("All walls already inserted or firstly add main stone ");
+                MessageBox.Show("Error : All walls already inserted or firstly add main stone ");
             }
-            
+
         }
 
-        internal void btnStart_Click(object sender, EventArgs e)
+        internal void btnStart_Click(object sender, EventArgs e) // for start game
         {
-            foreach(PictureBox pb in stones)
+            if(toplanacakTasSayısı!= maxPickingStone && duvarSayısı!= maxWall)
             {
-                pb.Enabled = false;
+                MessageBox.Show("Before starting game insert all picking stones and wall for this stage");
             }
-            this.start = new StartGame(this.pbx,pickStoneList,wallsIn,mainIn,this.dama);
-            btnStart.Enabled = false;
+            else
+            {
+                foreach (PictureBox pb in stones) // for side stones and wall
+                {
+                    pb.Enabled = false;
+                }
+                this.start = new StartGame(this.pbx, pickStoneList, wallsIn, mainIn, this.dama,this.main_Page);
+                btnStart.Enabled = false;
+            }
+            
         }
 
     }

@@ -60,10 +60,9 @@
             // 
             this.cbxDama.FormattingEnabled = true;
             this.cbxDama.Items.AddRange(new object[] {
-            "7",
-            "8",
             "9",
-            "10"});
+            "10",
+            "11"});
             this.cbxDama.Location = new System.Drawing.Point(115, 67);
             this.cbxDama.Name = "cbxDama";
             this.cbxDama.Size = new System.Drawing.Size(121, 21);

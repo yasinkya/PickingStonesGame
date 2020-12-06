@@ -27,23 +27,27 @@ namespace PickingTheStones
             this.Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
                     (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2);
 
-            List<Button> buttons = new List<Button>();
-            for (int i = 0; i < 10; i++)
-            {
-                Button newButton = new Button();
-                buttons.Add(newButton);
-                this.Controls.Add(newButton);
-            }
         }
 
         private void btnSingle_Click(object sender, EventArgs e)
         {
-            if(false )//cbxDama.SelectedIndex==-1 || cbxDif.SelectedIndex == -1)
+            if(cbxDama.SelectedIndex==-1 || cbxDif.SelectedIndex == -1)
             {
                 MessageBox.Show("Please select diff and dama size");
             }
             else
             {
+                int diff;
+                if (cbxDif.SelectedItem.ToString().ToLower() == "easy")
+                    diff = 1;
+                else if (cbxDif.SelectedItem.ToString().ToLower() == "middle")
+                    diff = 2;
+                else
+                    diff = 3;
+
+                MainPage main = new MainPage(Convert.ToInt32(cbxDama.SelectedItem),diff);
+                main.ShowDialog();
+                this.Close();
                 
 
             }

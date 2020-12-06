@@ -14,10 +14,12 @@ namespace PickingTheStones
     public partial class MainPage : Form
     {
         private int dama;
-        public MainPage()
+        private int diff;
+        public MainPage(int dama , int diff)
         {
             InitializeComponent();
-            this.dama = 10;
+            this.dama = dama;
+            this.diff = diff;
         }
         private CreateGame pbxs;
         private void MainPage_Load(object sender, EventArgs e)
@@ -27,8 +29,7 @@ namespace PickingTheStones
             this.Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
                 (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2);
             
-            pbxs = new CreateGame(dama);
-            //StartGame start = new StartGame();
+            pbxs = new CreateGame(dama,diff , this);
             pbxs.insertCompanents(this);
         }
     }
