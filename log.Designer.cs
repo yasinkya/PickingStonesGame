@@ -1,6 +1,6 @@
 ﻿namespace PickingTheStones
 {
-    partial class log
+    partial class Log
     {
         /// <summary>
         ///Gerekli tasarımcı değişkeni.
@@ -48,13 +48,13 @@
             // 
             // btnMultiple
             // 
-            this.btnMultiple.Enabled = false;
             this.btnMultiple.Location = new System.Drawing.Point(183, 115);
             this.btnMultiple.Name = "btnMultiple";
             this.btnMultiple.Size = new System.Drawing.Size(141, 23);
             this.btnMultiple.TabIndex = 1;
             this.btnMultiple.Text = "Multiple";
             this.btnMultiple.UseVisualStyleBackColor = true;
+            this.btnMultiple.Click += new System.EventHandler(this.btnMultiple_Click);
             // 
             // cbxDama
             // 

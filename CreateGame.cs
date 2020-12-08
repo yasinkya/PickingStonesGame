@@ -24,6 +24,7 @@ namespace PickingTheStones
         const int pbSize = 75;
         private int dama;
         private int diff;
+        private int s_c;
         int maxPickingStone;
         int maxWall;
         PictureBox[] stones = new PictureBox[3];
@@ -40,10 +41,12 @@ namespace PickingTheStones
         bool iswall;
         string mainIn;
 
-        public CreateGame(int dama, int diff, MainPage mainPage)
+        public CreateGame(int dama, int diff, MainPage mainPage,int s_c)
         {
             this.dama = dama;
             this.diff = diff;
+            this.s_c = s_c;
+
             this.main_Page = mainPage;
             this.pbx = new PictureBox[dama, dama];
             image_RedStn = main_Page.pbstn.BackgroundImage;
@@ -294,11 +297,14 @@ namespace PickingTheStones
                 {
                     pb.Enabled = false;
                 }
-                this.start = new StartGame(this.pbx, pickStoneList, wallsIn, mainIn, this.dama,this.main_Page);
+                
+                this.start = new StartGame(this.pbx, pickStoneList, wallsIn, mainIn, this.dama,this.main_Page, this.s_c);
                 btnStart.Enabled = false;
             }
             
         }
+
+        
 
     }
 }

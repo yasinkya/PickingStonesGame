@@ -15,13 +15,19 @@ namespace PickingTheStones
     {
         private int dama;
         private int diff;
-        public MainPage(int dama , int diff)
+        private int s_c;  // 0= server, 1= client, 2= normal
+
+        public MainPage(int dama , int diff,int s_c=2)
         {
             InitializeComponent();
+            CheckForIllegalCrossThreadCalls = false;
+
             this.dama = dama;
             this.diff = diff;
+            this.s_c = s_c;
         }
-        private CreateGame pbxs;
+        public CreateGame pbxs;
+        
         private void MainPage_Load(object sender, EventArgs e)
         {
             this.BackColor = Color.SkyBlue;
@@ -29,7 +35,7 @@ namespace PickingTheStones
             this.Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
                 (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2);
             
-            pbxs = new CreateGame(dama,diff , this);
+            pbxs = new CreateGame(dama,diff , this,this.s_c);
             pbxs.insertCompanents(this);
         }
     }

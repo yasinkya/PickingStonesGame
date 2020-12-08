@@ -16,9 +16,9 @@ namespace PickingTheStones
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new log());
+            Application.Run(new Log());
             //Application.Run(new MainPage());
-
+            //Application.Run(new client());
         }
     }
 }

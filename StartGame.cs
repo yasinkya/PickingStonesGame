@@ -22,11 +22,13 @@ namespace PickingTheStones
         private string selectedPbxName;
         bool picked;
         int dama;
+        int s_c;
         int puanForWin;
         int puan = 0;
 
-        public StartGame(PictureBox[,] pbx, LinkedList<string> topla, LinkedList<string> duvar, string whereMainStn, int dama,MainPage forEndingGame)
+        public StartGame(PictureBox[,] pbx, LinkedList<string> topla, LinkedList<string> duvar, string whereMainStn, int dama,MainPage forEndingGame,int s_c)
         {
+            this.s_c=s_c;
             this.dama = dama;
             this.pbx = pbx;
             this.topla = topla;
@@ -154,7 +156,8 @@ namespace PickingTheStones
                 topla.AddLast(newSelect.Name);
                 SetDistance(newSelect, true);
                 makeAccessible_PickingStones(true);
-                
+
+                SendMove(selectedPbxName + newSelect);
             }
             else
             {
@@ -305,6 +308,26 @@ namespace PickingTheStones
 
 
             return Math.Abs(mainY - y) + Math.Abs(mainX - x);
+        }
+
+        Log log = new Log();
+        public void SendMove(string move)
+        {
+            if (s_c == 0)
+            {
+                log.server.SendMove(move);
+            }
+            else if (s_c == 1)
+            {
+                log.client.SendMove(move);
+            }
+        }
+
+        public void MakeAMove(string move)
+        {
+            // p1-yx-xy   coming as string and parse this like in p1's picking stone list pbx[y,x] -> pbx[x,y]
+
+
         }
 
 
